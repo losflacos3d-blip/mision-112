@@ -1,0 +1,23 @@
+# Dependencias y temporales
+node_modules/
+*.log
+
+# Asistentes y herramientas de entorno
+.aider/
+.amp/
+.antigravity/
+.claude/
+.clinerules/
+.codex/
+.continue/
+.cursor/
+.dsh/
+.gemini/
+.jules/
+.junie/
+.kiro/
+.opencode/
+.roo/
+.windsurf/
+.zed/
+.rsc/

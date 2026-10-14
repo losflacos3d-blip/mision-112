@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Misión 112 — Plataforma Educativa de Emergencias y Protección Civil (7-12 años)</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="top-header">
+    <div class="header-inner">
+      <div class="brand" id="brand-home" title="Volver al panel principal de Misión 112">
+        <div class="badge-112">🚨 112</div>
+        <div class="brand-title">
+          <h1>MISIÓN 112</h1>
+          <span>Academia Escolar de Emergencias (7 a 12 años)</span>
+        </div>
+      </div>
+
+      <div class="header-controls">
+        <!-- Nombre del niño/agente -->
+        <div class="agent-pill">
+          <span>🧑‍🚒 Agente:</span>
+          <input
+            type="text"
+            id="agent-name-input"
+            class="agent-input"
+            placeholder="Tu nombre aquí..."
+            aria-label="Nombre del Agente 112"
+          />
+        </div>
+
+        <!-- Selector de Nivel de Edad -->
+        <div class="age-switch" role="group" aria-label="Nivel de edad">
+          <button class="age-btn active" data-age="7-9" title="Adaptado para 7 a 9 años (2º a 4º de Primaria)">
+            🧒 7-9 años
+          </button>
+          <button class="age-btn" data-age="10-12" title="Adaptado para 10 a 12 años (5º y 6º de Primaria)">
+            🧑 10-12 años
+          </button>
+        </div>
+
+        <!-- Botones de navegación -->
+        <button class="nav-btn active-view" id="nav-mision">
+          🎮 Misión y Juegos
+        </button>
+        <button class="nav-btn" id="nav-diploma">
+          🎓 Diploma <span id="diploma-count-badge" style="background:rgba(0,0,0,0.25);padding:0.1rem 0.45rem;border-radius:999px;font-size:0.78rem;">0/4</span>
+        </button>
+        <button class="nav-btn teacher-btn" id="nav-docente">
+          👩‍🏫 Zona Docente / Sorteo
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-container" id="app-content">
+    <!-- Renderizado dinámico desde app.js -->
+  </main>
+
+  <footer class="footer">
+    <strong>Misión 112</strong> — Plataforma Educativa Modular de Prevención y Autoprotección Escolar · Emergencias <strong>112</strong> (Gratuito · 24h · Toda Europa)
+  </footer>
+
+  <script src="data/catastrofes.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
