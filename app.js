@@ -30,6 +30,7 @@
     vistaActiva: "mision", // "mision" | "diploma" | "docente"
     juegoActivo: "mochila", // "mochila" | "fases" | "radar" | "simulador112"
     modoSorteoBloqueado: false, // Si es true, oculta el catálogo y deja fija solo la catástrofe elegida
+    modoCreador: false, // Oculto por defecto; se activa con 5 clics en el logo 🚨 112 o con ?admin=1
     progreso: {}, // { [catastrofeId]: { mochila: bool, fases: bool, radar: bool, simulador112: bool } }
     // Estado temporal del juego en curso
     mochilaSeleccion: [],
@@ -70,9 +71,15 @@
     if (edadParam === "7-9" || edadParam === "10-12") {
       estado.edad = edadParam;
     }
+    if (params.get("admin") === "1" || params.get("creador") === "1") {
+      estado.modoCreador = true;
+      estado.vistaActiva = "docente";
+    }
     const vistaParam = params.get("vista");
-    if (["mision", "diploma", "docente"].includes(vistaParam)) {
+    if (vistaParam === "mision" || vistaParam === "diploma") {
       estado.vistaActiva = vistaParam;
+    } else if (vistaParam === "docente" && estado.modoCreador) {
+      estado.vistaActiva = "docente";
     }
     const juegoParam = params.get("juego");
     if (["mochila", "fases", "radar", "simulador112"].includes(juegoParam)) {
@@ -101,12 +108,12 @@
       // Ignorar si almacenamiento restringido
     }
 
-    // Sincronizar URL sin recargar página
+    // Sincronizar URL sin recargar página (sin exponer la vista docente en la URL pública)
     try {
       const params = new URLSearchParams();
       params.set("catastrofe", estado.catastrofeActiva);
       params.set("edad", estado.edad);
-      params.set("vista", estado.vistaActiva);
+      params.set("vista", estado.vistaActiva === "diploma" ? "diploma" : "mision");
       params.set("juego", estado.juegoActivo);
       if (estado.modoSorteoBloqueado) params.set("sorteo", "1");
       const nuevaUrl = `${window.location.pathname}?${params.toString()}`;
@@ -169,7 +176,11 @@
 
     document.getElementById("nav-mision").classList.toggle("active-view", estado.vistaActiva === "mision");
     document.getElementById("nav-diploma").classList.toggle("active-view", estado.vistaActiva === "diploma");
-    document.getElementById("nav-docente").classList.toggle("active-view", estado.vistaActiva === "docente");
+    const btnDocente = document.getElementById("nav-docente");
+    if (btnDocente) {
+      btnDocente.style.display = estado.modoCreador ? "inline-flex" : "none";
+      btnDocente.classList.toggle("active-view", estado.vistaActiva === "docente");
+    }
 
     const medallasActuales = contarMedallas(cat.id);
     const badgeDiploma = document.getElementById("diploma-count-badge");
@@ -183,10 +194,11 @@
     if (estado.vistaActiva === "diploma") {
       contenedor.innerHTML = renderVistaDiploma(cat);
       enlazarEventosDiploma(cat);
-    } else if (estado.vistaActiva === "docente") {
+    } else if (estado.vistaActiva === "docente" && estado.modoCreador) {
       contenedor.innerHTML = renderVistaDocente(cat);
       enlazarEventosDocente(cat);
     } else {
+      estado.vistaActiva = "mision";
       contenedor.innerHTML = renderVistaMision(cat);
       enlazarEventosMision(cat);
     }
@@ -200,13 +212,14 @@
     const medallas = contarMedallas(cat.id);
     const esJunior = estado.edad === "7-9";
 
-    // Banner si el Modo Sorteo está fijado en una sola catástrofe
-    const bannerSorteo = estado.modoSorteoBloqueado
-      ? `<div class="sorteo-banner no-print">
-          <div>🎯 <strong>Modo Sorteo Activo:</strong> La plataforma está fijada exclusivamente en la catástrofe asignada: <strong>${cat.icono} ${cat.nombre}</strong>.</div>
-          <button class="btn-small" id="btn-abrir-catalogo">Cambiar catástrofe / Ver todas</button>
+    // Banner de sorteo solo visible si el Modo Creador está desbloqueado
+    const bannerSorteo =
+      estado.modoSorteoBloqueado && estado.modoCreador
+        ? `<div class="sorteo-banner no-print">
+          <div>🎯 <strong>Modo Sorteo Activo (Vista de Creadores):</strong> La web está fijada en <strong>${cat.icono} ${cat.nombre}</strong>. Los alumnos no ven este aviso ni otras catástrofes.</div>
+          <button class="btn-small" id="btn-abrir-catalogo">Desbloquear catálogo</button>
         </div>`
-      : "";
+        : "";
 
     // Selector de catálogo de catástrofes (visible si NO está bloqueado por sorteo)
     let seccionCatalogo = "";
@@ -752,10 +765,13 @@
     return `
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem;flex-wrap:wrap;gap:0.75rem;">
         <div>
-          <h2 style="font-size:1.5rem;">👩‍🏫 Zona Docente, Familia y Configuración del Sorteo</h2>
-          <p style="color:#475569;font-size:0.94rem;">Guía didáctica de Protección Civil y panel rápido para dejar fijada la catástrofe que os toque.</p>
+          <h2 style="font-size:1.5rem;">👩‍🏫 Zona Docente, Familia y Configuración del Sorteo (Panel Oculto)</h2>
+          <p style="color:#475569;font-size:0.94rem;">Acceso exclusivo para creadores (5 clics en el escudo 🚨 112 o <code>?admin=1</code>). Guía didáctica y panel del sorteo.</p>
         </div>
-        <button class="btn-secondary" id="btn-volver-desde-docente">⬅️ Volver a la Misión</button>
+        <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+          <button class="btn-secondary" id="btn-volver-desde-docente">⬅️ Volver a la Misión</button>
+          <button class="btn-secondary" id="btn-ocultar-docente" title="Ocultar de nuevo el botón de Zona Docente para la vista de alumnos">🔒 Ocultar panel (Vista Pública)</button>
+        </div>
       </div>
 
       <div class="teacher-panel">
@@ -1109,6 +1125,15 @@
       });
     }
 
+    const btnOcultar = document.getElementById("btn-ocultar-docente");
+    if (btnOcultar) {
+      btnOcultar.addEventListener("click", () => {
+        estado.modoCreador = false;
+        estado.vistaActiva = "mision";
+        render();
+      });
+    }
+
     const selectSorteo = document.getElementById("select-catastrofe-sorteo");
     if (selectSorteo) {
       selectSorteo.addEventListener("change", () => {
@@ -1124,7 +1149,12 @@
         const sel = document.getElementById("select-catastrofe-sorteo");
         const chk = document.getElementById("chk-bloquear-sorteo");
         if (sel) estado.catastrofeActiva = sel.value;
-        if (chk) estado.modoSorteoBloqueado = chk.checked;
+        if (chk) {
+          estado.modoSorteoBloqueado = chk.checked;
+          if (chk.checked) {
+            estado.modoCreador = false; // Al bloquear para la presentación, oculta también el panel de creadores
+          }
+        }
         estado.vistaActiva = "mision";
         reiniciarIntentoJuegoActual();
         render();
@@ -1185,6 +1215,7 @@
 
         estado.catastrofeActiva = nuevoId;
         estado.modoSorteoBloqueado = true;
+        estado.modoCreador = false;
         estado.vistaActiva = "mision";
         reiniciarIntentoJuegoActual();
         render();
@@ -1219,9 +1250,26 @@
       });
     });
 
+    // Acceso oculto por 5 clics seguidos en el logo 🚨 112
+    let clicsLogo = 0;
+    let temporizadorLogo = null;
     document.getElementById("brand-home").addEventListener("click", () => {
-      estado.vistaActiva = "mision";
-      render();
+      clicsLogo += 1;
+      if (temporizadorLogo) clearTimeout(temporizadorLogo);
+      if (clicsLogo >= 5) {
+        clicsLogo = 0;
+        estado.modoCreador = true;
+        estado.vistaActiva = "docente";
+        render();
+        return;
+      }
+      temporizadorLogo = setTimeout(() => {
+        clicsLogo = 0;
+      }, 2200);
+      if (estado.vistaActiva !== "mision") {
+        estado.vistaActiva = "mision";
+        render();
+      }
     });
 
     document.getElementById("nav-mision").addEventListener("click", () => {

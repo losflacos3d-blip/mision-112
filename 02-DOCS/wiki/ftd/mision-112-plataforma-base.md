@@ -34,12 +34,14 @@ Crear la plataforma web educativa y gamificada **Misión 112** para niños de 7 
 - [x] **Tarea 5 — Botón de Ruleta Aleatoria en Zona Docente (`app.js`)**: Añadir un botón interactivo "🎲 Ruleta aleatoria para el aula" en el panel de sorteo que elija una catástrofe al azar con animación breve y la seleccione. *Prueba:* el botón existe en `renderVistaDocente` y selecciona una catástrofe válida de las 17.
 - [x] **Tarea 6 — Completar 6 tarjetas Senior de Antes/Durante/Después en las 17 catástrofes (`data/catastrofes.js`)**: Añadir las 3 tarjetas de nivel `10-12` (1 antes, 1 durante, 1 después) en las 12 catástrofes que solo tenían 3 tarjetas. *Prueba:* script de verificación confirma 6 tarjetas Senior y 3 tarjetas Junior en las 17 catástrofes.
 - [x] **Tarea 7 — Limpieza de repositorio y publicación web en GitHub Pages (`.gitignore`, `README.md`, `git push`)**: Ignorar archivos internos del asistente en `.gitignore`, subir los cambios a `main` y activar/documentar la URL pública de GitHub Pages. *Prueba:* `git status` limpio y cambios subidos al repositorio remoto.
+- [x] **Tarea 8 — Acceso oculto mixto a Zona Docente (`index.html`, `app.js`)**: Ocultar el botón de Zona Docente y el aviso de desbloqueo al público general, permitiendo entrar a los creadores mediante 5 clics seguidos en el logo `🚨 112` o mediante `?admin=1` en la URL. *Prueba:* por defecto `#nav-docente` está oculto y se activa con `?admin=1` o 5 clics en `#brand-home`.
 
 ## Evidence
 - Verificación mediante script Node.js sobre `data/catastrofes.js` y `app.js`: `Total catástrofes: 17 ['inundaciones', 'incendios', 'terremotos', 'volcanes', 'tormentas', 'ola_calor', 'nevadas', 'vientos', 'maremotos', 'quimico', 'apagon', 'aludes', 'nuclear', 'sanitaria', 'costeros', 'incendios_forestales', 'mercancias'] — VERIFICACIÓN 17/17 OK.`
 - Verificación de tarjetas Antes/Durante/Después en las 17 catástrofes: `Junior fases: 3, Senior fases: 6 en las 17 catástrofes — ALL 17 OK: true`.
 - Verificación sintáctica (`node -c app.js` y `node -c data/catastrofes.js`) sin errores y botón `btn-ruleta-sorteo` enlazado en `renderVistaDocente` y `enlazarEventosDocente`.
+- Verificación de acceso oculto mixto (`modoCreador`, `clicsLogo >= 5`, `?admin=1`, y `#nav-docente` con `display:none` por defecto).
 - GitHub Pages activo y publicado en `https://losflacos3d-blip.github.io/mision-112/`.
 
 ## Next
-Proyecto 100% finalizado y publicado en internet. Solo queda elegir o bloquear la catástrofe en Zona Docente el día del sorteo.
+Proyecto 100% finalizado, con Zona Docente oculta para el público y accesible para los creadores mediante 5 clics en el logo `🚨 112` o con `?admin=1`.
