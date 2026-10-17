@@ -795,8 +795,8 @@
                 <strong style="display:block;color:#0f172a;font-size:0.88rem;margin-bottom:0.25rem;">📱 QR para el Cartel Escolar</strong>
                 <p style="color:#475569;font-size:0.78rem;margin-bottom:0.5rem;">Escanea este QR con el móvil o descárgalo para imprimirlo y pegarlo en el cartel.</p>
                 <div style="display:flex;gap:0.4rem;flex-wrap:wrap;">
-                  <a href="cartel-exposicion.html?mision=${encodeURIComponent(cat.id)}" target="_blank" rel="noopener" class="btn-primary" style="font-size:0.76rem;padding:0.35rem 0.65rem;text-decoration:none;">🖼️ Abrir Cartel Completo con QR</a>
-                  <a href="qr-mision-112.png" download="qr-mision-112.png" class="btn-secondary" style="font-size:0.76rem;padding:0.35rem 0.65rem;text-decoration:none;">⬇️ Solo QR (PNG)</a>
+                  <a href="qr-mision-112.png" download="qr-mision-112.png" class="btn-secondary" style="font-size:0.76rem;padding:0.35rem 0.65rem;text-decoration:none;">⬇️ Descargar QR General (PNG)</a>
+                  <a href="https://api.qrserver.com/v1/create-qr-code/?size=1000x1000&margin=30&ecc=M&data=${encodeURIComponent(urlSorteoDirecta)}" target="_blank" rel="noopener" class="btn-secondary" style="font-size:0.76rem;padding:0.35rem 0.65rem;text-decoration:none;">🔍 Abrir QR de ${cat.nombreCorto}</a>
                 </div>
               </div>
             </div>
