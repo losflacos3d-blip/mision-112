@@ -2,6 +2,8 @@
 
 Plataforma educativa modular y gamificada de emergencias y autoprotección para niños de 7 a 12 años (Protección Civil y 112).
 
+🌐 **Web pública lista para jugar:** [https://losflacos3d-blip.github.io/mision-112/](https://losflacos3d-blip.github.io/mision-112/)
+
 ## Características principales
 - **17 Catástrofes y riesgos modelados:** Inundaciones, incendios, terremotos, volcanes, tormentas, ola de calor, nevadas, vientos, maremotos, accidentes químicos, apagón, aludes, nuclear, alerta sanitaria, costeros, incendios forestales y mercancías peligrosas.
 - **4 Juegos interactivos reutilizables por misión:**

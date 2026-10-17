@@ -787,7 +787,9 @@
 
           <div style="display:flex;gap:0.65rem;flex-wrap:wrap;margin-top:1rem;">
             <button class="btn-primary" id="btn-aplicar-sorteo">✅ Activar esta catástrofe e ir a la misión</button>
+            <button class="btn-secondary" id="btn-ruleta-sorteo" title="Elegir una catástrofe al azar para practicar en clase">🎲 Ruleta aleatoria para el aula</button>
           </div>
+          <div id="ruleta-resultado-msg" style="margin-top:0.6rem;font-size:0.88rem;font-weight:800;color:#b45309;display:none;"></div>
 
           <div style="margin-top:1.1rem;padding-top:0.9rem;border-top:1px dashed #d97706;font-size:0.82rem;color:#78350f;">
             <strong>🔗 Enlace directo a esta catástrofe bloqueada:</strong>
@@ -1126,6 +1128,24 @@
         estado.vistaActiva = "mision";
         reiniciarIntentoJuegoActual();
         render();
+      });
+    }
+
+    const btnRuletaSorteo = document.getElementById("btn-ruleta-sorteo");
+    if (btnRuletaSorteo) {
+      btnRuletaSorteo.addEventListener("click", () => {
+        const todasIds = Object.keys(window.CATALOGO_CATASTROFES);
+        const candidatas = todasIds.length > 1 ? todasIds.filter((id) => id !== estado.catastrofeActiva) : todasIds;
+        const azarId = candidatas[Math.floor(Math.random() * candidatas.length)];
+        estado.catastrofeActiva = azarId;
+        reiniciarIntentoJuegoActual();
+        render();
+        const msg = document.getElementById("ruleta-resultado-msg");
+        const elegida = window.CATALOGO_CATASTROFES[azarId];
+        if (msg && elegida) {
+          msg.style.display = "block";
+          msg.textContent = `🎉 ¡La ruleta ha elegido: ${elegida.icono} ${elegida.nombre}!`;
+        }
       });
     }
 

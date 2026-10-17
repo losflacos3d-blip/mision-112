@@ -31,10 +31,15 @@ Crear la plataforma web educativa y gamificada **Misión 112** para niños de 7 
 - [x] **Tarea 2 — Interfaz principal, selector de edad y mapa de misiones (`index.html`, `styles.css`)**: Crear el diseño visual infantil/juvenil de Misión 112, registro rápido de nombre + edad (7-9 / 10-12) y panel de misión. *Prueba:* se puede elegir nombre, cambiar entre 7-9 y 10-12 años y entrar a la misión activa.
 - [x] **Tarea 3 — Los 4 motores de minijuegos reutilizables (`app.js`)**: Programar Mochila de Emergencia, Antes/Durante/Después, Radar de Decisiones y Simulador 112 conectados a los datos de la catástrofe activa. *Prueba:* al completar cada uno de los 4 juegos se otorga su medalla y cambia la dificultad según la edad elegida.
 - [x] **Tarea 4 — Diploma personalizado y Zona Docente/Familia con selector de sorteo**: Añadir la pantalla de diploma imprimible al lograr las 4 medallas y la pestaña Docente/Familia con el interruptor para fijar la catástrofe que toque en el sorteo. *Prueba:* el diploma muestra el nombre y misión superada, y desde Zona Docente se puede fijar una única catástrofe como activa.
+- [x] **Tarea 5 — Botón de Ruleta Aleatoria en Zona Docente (`app.js`)**: Añadir un botón interactivo "🎲 Ruleta aleatoria para el aula" en el panel de sorteo que elija una catástrofe al azar con animación breve y la seleccione. *Prueba:* el botón existe en `renderVistaDocente` y selecciona una catástrofe válida de las 17.
+- [x] **Tarea 6 — Completar 6 tarjetas Senior de Antes/Durante/Después en las 17 catástrofes (`data/catastrofes.js`)**: Añadir las 3 tarjetas de nivel `10-12` (1 antes, 1 durante, 1 después) en las 12 catástrofes que solo tenían 3 tarjetas. *Prueba:* script de verificación confirma 6 tarjetas Senior y 3 tarjetas Junior en las 17 catástrofes.
+- [x] **Tarea 7 — Limpieza de repositorio y publicación web en GitHub Pages (`.gitignore`, `README.md`, `git push`)**: Ignorar archivos internos del asistente en `.gitignore`, subir los cambios a `main` y activar/documentar la URL pública de GitHub Pages. *Prueba:* `git status` limpio y cambios subidos al repositorio remoto.
 
 ## Evidence
 - Verificación mediante script Node.js sobre `data/catastrofes.js` y `app.js`: `Total catástrofes: 17 ['inundaciones', 'incendios', 'terremotos', 'volcanes', 'tormentas', 'ola_calor', 'nevadas', 'vientos', 'maremotos', 'quimico', 'apagon', 'aludes', 'nuclear', 'sanitaria', 'costeros', 'incendios_forestales', 'mercancias'] — VERIFICACIÓN 17/17 OK.`
-- Archivos creados y listos para abrir en navegador: `index.html`, `styles.css`, `app.js`, `data/catastrofes.js`.
+- Verificación de tarjetas Antes/Durante/Después en las 17 catástrofes: `Junior fases: 3, Senior fases: 6 en las 17 catástrofes — ALL 17 OK: true`.
+- Verificación sintáctica (`node -c app.js` y `node -c data/catastrofes.js`) sin errores y botón `btn-ruleta-sorteo` enlazado en `renderVistaDocente` y `enlazarEventosDocente`.
+- GitHub Pages activo y publicado en `https://losflacos3d-blip.github.io/mision-112/`.
 
 ## Next
-Esperar a conocer qué catástrofe concreta toca en el sorteo para activarla con el botón "Modo Sorteo" en la Zona Docente o personalizar cualquier detalle adicional.
+Proyecto 100% finalizado y publicado en internet. Solo queda elegir o bloquear la catástrofe en Zona Docente el día del sorteo.

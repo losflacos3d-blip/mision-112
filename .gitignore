@@ -21,3 +21,6 @@ node_modules/
 .windsurf/
 .zed/
 .rsc/
+.github/
+.rsc.json
+opencode.json
