@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pegatina QR — Misión 112</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: #f1f5f9;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 1.5rem;
+    }
+    .actions {
+      margin-bottom: 1.25rem;
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .btn {
+      background: #dc2626;
+      color: #fff;
+      border: none;
+      padding: 0.7rem 1.25rem;
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: 0.95rem;
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: 0 4px 12px rgba(220, 38, 38, 0.25);
+    }
+    .btn-sec {
+      background: #0f172a;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.2);
+    }
+    .qr-card {
+      background: #ffffff;
+      border: 6px solid #dc2626;
+      border-radius: 28px;
+      padding: 1.75rem 2rem;
+      max-width: 380px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.12);
+    }
+    .badge {
+      display: inline-block;
+      background: #dc2626;
+      color: #ffffff;
+      font-weight: 900;
+      font-size: 1.1rem;
+      padding: 0.35rem 1rem;
+      border-radius: 999px;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.65rem;
+    }
+    h1 {
+      font-size: 1.65rem;
+      color: #0f172a;
+      font-weight: 900;
+      line-height: 1.15;
+      margin-bottom: 0.35rem;
+    }
+    .subtitle {
+      font-size: 0.95rem;
+      color: #475569;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+    .qr-box {
+      background: #fff;
+      border: 3px dashed #cbd5e1;
+      border-radius: 20px;
+      padding: 0.75rem;
+      display: inline-block;
+      margin-bottom: 0.85rem;
+    }
+    .qr-box img {
+      width: 240px;
+      height: 240px;
+      display: block;
+    }
+    .cta {
+      background: #fef2f2;
+      color: #991b1b;
+      font-weight: 800;
+      font-size: 0.95rem;
+      padding: 0.55rem 0.85rem;
+      border-radius: 12px;
+      margin-bottom: 0.5rem;
+    }
+    .url {
+      font-size: 0.72rem;
+      color: #64748b;
+      word-break: break-all;
+    }
+    @media print {
+      body { background: #fff; padding: 0; min-height: auto; }
+      .actions { display: none !important; }
+      .qr-card { box-shadow: none; margin: 1cm auto; }
+    }
+  </style>
+</head>
+<body>
+  <div class="actions">
+    <button class="btn" onclick="window.print()">🖨️ Imprimir pegatina QR para el cartel</button>
+    <a class="btn btn-sec" href="qr-mision-112.png" download="qr-mision-112.png">⬇️ Descargar solo imagen QR (PNG)</a>
+  </div>
+
+  <div class="qr-card">
+    <div class="badge">🚨 112 PROTECCIÓN CIVIL</div>
+    <h1>MISIÓN 112</h1>
+    <p class="subtitle">Academia Interactiva de Emergencias</p>
+    <div class="qr-box">
+      <img src="qr-mision-112.png" alt="Código QR Misión 112" />
+    </div>
+    <div class="cta">📱 ¡Escanea y supera los 4 retos!</div>
+    <div class="url">losflacos3d-blip.github.io/mision-112</div>
+  </div>
+</body>
+</html>

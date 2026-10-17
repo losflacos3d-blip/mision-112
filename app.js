@@ -789,6 +789,17 @@
           <div style="margin-top:1.1rem;padding-top:0.9rem;border-top:1px dashed #d97706;font-size:0.82rem;color:#78350f;">
             <strong>🔗 Enlace público directo a esta misión (${cat.nombreCorto}):</strong>
             <input type="text" readonly class="form-control" value="${urlSorteoDirecta}" style="margin-top:0.35rem;font-size:0.78rem;background:#fff;" onclick="this.select()" />
+            <div style="display:flex;align-items:center;gap:1rem;margin-top:0.85rem;background:#fff;padding:0.75rem;border-radius:12px;border:1px solid #fde68a;flex-wrap:wrap;">
+              <img src="https://api.qrserver.com/v1/create-qr-code/?size=240x240&margin=12&ecc=M&data=${encodeURIComponent(urlSorteoDirecta)}" alt="Código QR de la misión ${cat.nombreCorto}" style="width:110px;height:110px;border-radius:8px;border:1px solid #e2e8f0;" />
+              <div style="flex:1;min-width:180px;">
+                <strong style="display:block;color:#0f172a;font-size:0.88rem;margin-bottom:0.25rem;">📱 QR para el Cartel Escolar</strong>
+                <p style="color:#475569;font-size:0.78rem;margin-bottom:0.5rem;">Escanea este QR con el móvil o descárgalo para imprimirlo y pegarlo en el cartel.</p>
+                <div style="display:flex;gap:0.4rem;flex-wrap:wrap;">
+                  <a href="qr-mision-112.png" download="qr-mision-112.png" class="btn-secondary" style="font-size:0.76rem;padding:0.35rem 0.65rem;text-decoration:none;">⬇️ Descargar QR General (PNG)</a>
+                  <a href="https://api.qrserver.com/v1/create-qr-code/?size=1000x1000&margin=30&ecc=M&data=${encodeURIComponent(urlSorteoDirecta)}" target="_blank" rel="noopener" class="btn-secondary" style="font-size:0.76rem;padding:0.35rem 0.65rem;text-decoration:none;">🔍 Abrir QR de ${cat.nombreCorto}</a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
